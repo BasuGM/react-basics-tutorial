@@ -70,17 +70,17 @@ const QuizTemplate: React.FC<QuizTemplateProps> = ({ data }) => {
             title="Quiz Results"
             description={`You scored ${score} out of ${data.questions.length}`}
           />
+          <div className="space-y-8">
+            {data.questions.map((q, index) => (
+              <ReviewQuestionCard key={index} question={q} index={index} answers={answers} />
+            ))}
+          </div>
           <ResultsSummary
             score={score}
             total={data.questions.length}
             passed={passed}
             lessonSlug={data.lessonSlug}
           />
-          <div className="space-y-8">
-            {data.questions.map((q, index) => (
-              <ReviewQuestionCard key={index} question={q} index={index} answers={answers} />
-            ))}
-          </div>
         </div>
       </div>
     );

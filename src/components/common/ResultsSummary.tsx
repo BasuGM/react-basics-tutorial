@@ -10,29 +10,40 @@ interface ResultsSummaryProps {
   lessonSlug: string;
 }
 
-const ResultsSummary: React.FC<ResultsSummaryProps> = ({ score, total, passed, lessonSlug }) => (
-  <Card className="rounded-none mb-12">
-    <CardContent className="prose prose-neutral dark:prose-invert text-[20px] md:text-[22px] lg:text-[24px] leading-relaxed md:leading-loose space-y-4 pt-6">
-      <div className="text-center">
-        {passed ? (
-          <div className="text-green-600 dark:text-green-400">
-            <CheckCircle className="h-20 w-20 mx-auto mb-6" />
-            <h2 className="text-4xl font-bold mb-4">Congratulations!</h2>
-            <p>You've passed the quiz. Great job!</p>
+const ResultsSummary: React.FC<ResultsSummaryProps> = ({ score, total, passed, lessonSlug }) => {
+  // Extract parent lesson from slug (e.g., "javascript-basics-for-react/arrow-functions" -> "javascript-basics-for-react")
+  const parentLesson = lessonSlug.split('/')[0];
+  const parentLessonLink = `/lesson/${parentLesson}`;
+
+  return (
+    <Card className="rounded-none mb-12">
+      <CardContent className="prose prose-neutral dark:prose-invert text-[20px] md:text-[22px] lg:text-[24px] leading-relaxed md:leading-loose space-y-4 pt-6">
+        <div className="text-center">
+          {passed ? (
+            <div className="text-green-600 dark:text-green-400">
+              <CheckCircle className="h-20 w-20 mx-auto mb-6" />
+              <h2 className="text-4xl font-bold mb-4">Congratulations!</h2>
+              <p>You've passed the quiz. Great job!</p>
+            </div>
+          ) : (
+            <div className="text-red-600 dark:text-red-400">
+              <XCircle className="h-20 w-20 mx-auto mb-6" />
+              <h2 className="text-4xl font-bold mb-4">Keep Learning</h2>
+              <p>Review the material and try again.</p>
+            </div>
+          )}
+          <div className="flex flex-col sm:flex-row gap-3 justify-center mt-6">
+            <Button asChild>
+              <Link href={`/lesson/${lessonSlug}`}>Back to Lesson</Link>
+            </Button>
+            <Button asChild variant="outline">
+              <Link href={parentLessonLink}>Back to Topics</Link>
+            </Button>
           </div>
-        ) : (
-          <div className="text-red-600 dark:text-red-400">
-            <XCircle className="h-20 w-20 mx-auto mb-6" />
-            <h2 className="text-4xl font-bold mb-4">Keep Learning</h2>
-            <p>Review the material and try again.</p>
-          </div>
-        )}
-        <Button asChild className="mt-6">
-          <Link href={`/lesson/${lessonSlug}`}>Back to Lesson</Link>
-        </Button>
-      </div>
-    </CardContent>
-  </Card>
-);
+        </div>
+      </CardContent>
+    </Card>
+  );
+};
 
 export default ResultsSummary;

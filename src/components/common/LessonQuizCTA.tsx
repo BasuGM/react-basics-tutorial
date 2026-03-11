@@ -1,5 +1,7 @@
+'use client'
+
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useProgressStore } from "@/store/progressStore";
 
 interface LessonQuizCTAProps {
@@ -11,10 +13,12 @@ interface LessonQuizCTAProps {
 }
 
 const LessonQuizCTA: React.FC<LessonQuizCTAProps> = ({ title, subtitle, quizLink, lessonId, contentSlug }) => {
+  const router = useRouter();
   const markTheoryComplete = useProgressStore((state) => state.markTheoryComplete);
 
   const handleQuizClick = () => {
     markTheoryComplete(lessonId, contentSlug);
+    router.push(quizLink);
   };
 
   return (
@@ -28,8 +32,8 @@ const LessonQuizCTA: React.FC<LessonQuizCTAProps> = ({ title, subtitle, quizLink
             {subtitle}
           </p>
         </div>
-        <Button asChild className="px-12 py-4 text-lg md:text-xl rounded-none hover:shadow-xl hover:ring-2 hover:ring-primary/20 transition-all duration-300 bg-primary hover:bg-primary/90">
-          <Link href={quizLink} onClick={handleQuizClick}>Go to Quiz</Link>
+        <Button onClick={handleQuizClick} className="px-12 py-4 text-lg md:text-xl rounded-none hover:shadow-xl hover:ring-2 hover:ring-primary/20 transition-all duration-300 bg-primary hover:bg-primary/90">
+          Go to Quiz
         </Button>
       </div>
     </div>
