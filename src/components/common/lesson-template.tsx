@@ -24,6 +24,9 @@ export function LessonTemplate({ data }: { data: LessonPageData }) {
   const hydrated = useProgressStore((state) => state.hydrated);
   const lessonProgress = getLessonProgress(data.id);
 
+  console.log('lessonProgress')
+  console.dir(lessonProgress)
+
   return (
     <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-8 max-w-6xl">

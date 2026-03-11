@@ -215,6 +215,7 @@ export const useProgressStore = create<ProgressState>()(
         const totalTheory = contents.length;
         const totalQuiz = contents.length;
         const totalItems = totalTheory + totalQuiz;
+
         const completedItems = completedTheory + completedQuiz;
         const progressPercentage = totalItems > 0 ? Math.round((completedItems / totalItems) * 100) : 0;
 

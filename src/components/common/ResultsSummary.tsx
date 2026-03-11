@@ -32,6 +32,11 @@ const ResultsSummary: React.FC<ResultsSummaryProps> = ({ score, total, passed, l
               <p>Review the material and try again.</p>
             </div>
           )}
+          <div className="mt-8 mb-6">
+            <p className="text-3xl font-semibold text-foreground">
+              Score: <span className={passed ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"}>{score}/{total}</span>
+            </p>
+          </div>
           <div className="flex flex-col sm:flex-row gap-3 justify-center mt-6">
             <Button asChild>
               <Link href={`/lesson/${lessonSlug}`}>Back to Lesson</Link>
